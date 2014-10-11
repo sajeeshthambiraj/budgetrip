@@ -48,8 +48,9 @@ class Registration extends CI_Controller {
     public function step_two() {
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $data['title'] = ucfirst('step one');
-
+        $this->load->library('session');
+        $this->load->helper('form');
+        
        // $this->form_validation->set_rules('dob', 'Date of birth', 'required|valid_date[d-m-y,-]');
         $this->form_validation->set_rules('address', 'Address', 'required');
         $this->form_validation->set_rules('pincode', 'Pincode', 'required|required|integer|min_length[10]|max_length[10]');
@@ -60,7 +61,7 @@ class Registration extends CI_Controller {
         $form_submit = $this->input->post('tostepthree');
 
 
-        $data['title'] = ucfirst('Step Two');
+        $data['title'] = $this->session->userdata('username');
         if ('NEXT' === $form_submit) {
 
 
@@ -93,7 +94,6 @@ class Registration extends CI_Controller {
     public function step_three() {
         $this->load->library('session');
         $this->load->helper('form');
-        
         echo "Welcome ".$this->session->userdata('username');
         
     }

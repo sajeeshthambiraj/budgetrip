@@ -40,19 +40,13 @@ class Login extends CI_Controller{
             
                $result = $this->login_model->check_user_exist();
                if(!empty($result))
-               {
-                   
+               {  
                    $this->load->helper('url');
                    $this->load->library('session');
-                   
                    $my_session = array ('username' => $this->input->post('username'));
                    $this->session->set_userdata($my_session);
-                   
-                   
                    $url = 'home/user';
                    redirect($url);
-                  
-                   
                }
                else 
                {
